@@ -10,7 +10,7 @@
 
 import sys
 from PyQt4 import QtCore, QtGui
-from card_bank1 import Ui_MainWindow
+from card_bank import Ui_MainWindow
 
 class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self):
