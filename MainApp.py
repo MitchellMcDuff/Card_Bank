@@ -10,21 +10,7 @@
 
 import sys
 from PyQt4 import QtCore, QtGui
-from play_game import Ui_PlayGameWindow
-from card_bank import Ui_MainWindow
-
-
-class PlayGame(QtGui.QMainWindow, Ui_PlayGameWindow):
-    def __init__(self):
-        super(PlayGame, self).__init__()
-        self.setupUi(self)
-        
-        #set up buttons
-        self.goBackButton.clicked.connect(self.goBackButtonClick)
-
-    def goBackButtonClick(self):
-        print "clicked"
-
+from card_bank1 import Ui_MainWindow
 
 class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
     def __init__(self):
@@ -36,6 +22,8 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
 
     def playButtonClick(self):
         print "clicked"
+        self.stackedWidget.setCurrentIndex(1)
+
         
         
         
