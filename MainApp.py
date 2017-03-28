@@ -19,10 +19,15 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
         
         #set up buttons
         self.playButton.clicked.connect(self.playButtonClick)
+        self.goBackButton.clicked.connect(self.goBackButtonClick)
+
 
     def playButtonClick(self):
-        print "clicked"
         self.stackedWidget.setCurrentIndex(1)
+    
+    def goBackButtonClick(self):
+        self.stackedWidget.setCurrentIndex(0)
+        
 
         
         

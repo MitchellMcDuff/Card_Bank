@@ -20,7 +20,7 @@
       <property name="currentIndex">
        <number>0</number>
       </property>
-      <widget class="QWidget" name="page_2">
+      <widget class="QWidget" name="mainmenu">
        <layout class="QGridLayout" name="gridLayout">
         <item row="0" column="0">
          <layout class="QVBoxLayout" name="initialVerticalLayout">
@@ -60,7 +60,7 @@
           <item>
            <layout class="QGridLayout" name="lowerLevelGridLayout">
             <item row="0" column="1">
-             <widget class="QPushButton" name="exitButton">
+             <widget class="QPushButton" name="exit1Button">
               <property name="text">
                <string>Exit</string>
               </property>
@@ -85,16 +85,16 @@
         </item>
        </layout>
       </widget>
-      <widget class="QWidget" name="page_1">
+      <widget class="QWidget" name="playgame">
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
          <layout class="QVBoxLayout" name="verticalLayout">
           <item>
-           <layout class="QGridLayout" name="gridLayout_2">
+           <layout class="QGridLayout" name="botButtonsGridLayout">
             <item row="2" column="0">
-             <widget class="QPushButton" name="pushButton_3">
+             <widget class="QPushButton" name="startOverButton">
               <property name="text">
-               <string>PushButton</string>
+               <string>Start OVer</string>
               </property>
              </widget>
             </item>
@@ -121,26 +121,16 @@
             <item row="2" column="2">
              <widget class="QProgressBar" name="progressBar">
               <property name="value">
-               <number>24</number>
+               <number>0</number>
               </property>
              </widget>
             </item>
            </layout>
           </item>
           <item>
-           <layout class="QGridLayout" name="gridLayout_7">
-            <item row="0" column="2">
-             <spacer name="horizontalSpacer_3">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
+           <layout class="QGridLayout" name="topButtonsGridLayout">
+            <item row="0" column="1">
+             <widget class="QTextBrowser" name="textBrowser"/>
             </item>
             <item row="0" column="0">
              <spacer name="horizontalSpacer">
@@ -155,41 +145,51 @@
               </property>
              </spacer>
             </item>
-            <item row="0" column="1">
-             <widget class="QTextBrowser" name="textBrowser"/>
+            <item row="0" column="2">
+             <spacer name="horizontalSpacer_3">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
             </item>
            </layout>
           </item>
-         </layout>
-        </item>
-        <item row="1" column="0">
-         <layout class="QGridLayout" name="gridLayout_8">
-          <item row="0" column="2">
-           <widget class="QPushButton" name="pushButton">
-            <property name="text">
-             <string>PushButton</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <spacer name="horizontalSpacer_4">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="0" column="0">
-           <widget class="QPushButton" name="pushButton_4">
-            <property name="text">
-             <string>PushButton</string>
-            </property>
-           </widget>
+          <item>
+           <layout class="QGridLayout" name="playGameGridLayout">
+            <item row="0" column="2">
+             <widget class="QPushButton" name="nextButton">
+              <property name="text">
+               <string>Next</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QPushButton" name="exit2Button">
+              <property name="text">
+               <string>Exit</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="1">
+             <spacer name="horizontalSpacer_4">
+              <property name="orientation">
+               <enum>Qt::Horizontal</enum>
+              </property>
+              <property name="sizeHint" stdset="0">
+               <size>
+                <width>40</width>
+                <height>20</height>
+               </size>
+              </property>
+             </spacer>
+            </item>
+           </layout>
           </item>
          </layout>
         </item>
@@ -204,7 +204,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>exitButton</sender>
+   <sender>exit1Button</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>close()</slot>
@@ -216,6 +216,22 @@
     <hint type="destinationlabel">
      <x>772</x>
      <y>514</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>exit2Button</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>close()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>64</x>
+     <y>539</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>-26</x>
+     <y>495</y>
     </hint>
    </hints>
   </connection>
