@@ -18,14 +18,19 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
         self.setupUi(self)
         
         #set up buttons
-        self.playButton.clicked.connect(self.playButtonClick)
-        self.goBackButton.clicked.connect(self.goBackButtonClick)
+        self.playButton.clicked.connect(self.playGameButtonClick)
+        self.goBackButton.clicked.connect(self.goBackToMainMenuButtonClick)
+        self.goBack2Button.clicked.connect(self.goBackToMainMenuButtonClick)
+        self.editCardsButton.clicked.connect(self.editCardsMenuButtonClick)
 
 
-    def playButtonClick(self):
+    def editCardsMenuButtonClick(self):
+        self.stackedWidget.setCurrentIndex(2)
+        
+    def playGameButtonClick(self):
         self.stackedWidget.setCurrentIndex(1)
     
-    def goBackButtonClick(self):
+    def goBackToMainMenuButtonClick(self):
         self.stackedWidget.setCurrentIndex(0)
         
 
