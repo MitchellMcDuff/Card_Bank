@@ -104,30 +104,10 @@
           </item>
           <item>
            <layout class="QGridLayout" name="gridLayout_11">
-            <item row="1" column="0">
-             <spacer name="horizontalSpacer_5">
-              <property name="orientation">
-               <enum>Qt::Horizontal</enum>
-              </property>
-              <property name="sizeHint" stdset="0">
-               <size>
-                <width>40</width>
-                <height>20</height>
-               </size>
-              </property>
-             </spacer>
-            </item>
             <item row="0" column="1">
              <widget class="QLabel" name="label">
               <property name="text">
                <string>Players:</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QPushButton" name="pushButton">
-              <property name="text">
-               <string>Remove Player</string>
               </property>
              </widget>
             </item>
@@ -154,22 +134,10 @@
               <property name="selectionRectVisible">
                <bool>true</bool>
               </property>
-              <item>
-               <property name="text">
-                <string>Player 1</string>
-               </property>
-               <property name="flags">
-                <set>ItemIsSelectable|ItemIsEditable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
-               </property>
-              </item>
              </widget>
             </item>
-           </layout>
-          </item>
-          <item>
-           <layout class="QHBoxLayout" name="horizontalLayout_5">
-            <item>
-             <spacer name="horizontalSpacer_4">
+            <item row="1" column="0">
+             <spacer name="horizontalSpacer_5">
               <property name="orientation">
                <enum>Qt::Horizontal</enum>
               </property>
@@ -180,13 +148,6 @@
                </size>
               </property>
              </spacer>
-            </item>
-            <item>
-             <widget class="QPushButton" name="exitButton">
-              <property name="text">
-               <string>Exit</string>
-              </property>
-             </widget>
             </item>
            </layout>
           </item>
@@ -666,7 +627,7 @@
             <item row="0" column="2">
              <layout class="QVBoxLayout" name="verticalLayout_4">
               <item>
-               <widget class="QTableWidget" name="scorBoardTableWidget">
+               <widget class="QTableWidget" name="scoreBoardTableWidget">
                 <property name="editTriggers">
                  <set>QAbstractItemView::NoEditTriggers</set>
                 </property>
@@ -676,6 +637,11 @@
                 <property name="selectionBehavior">
                  <enum>QAbstractItemView::SelectItems</enum>
                 </property>
+                <column>
+                 <property name="text">
+                  <string>Player</string>
+                 </property>
+                </column>
                 <column>
                  <property name="text">
                   <string>Score</string>
@@ -690,13 +656,6 @@
           <item>
            <layout class="QGridLayout" name="playGameGridLayout">
             <item row="0" column="2">
-             <widget class="QPushButton" name="skipButton">
-              <property name="text">
-               <string>Skip</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="3">
              <widget class="QPushButton" name="nextButton">
               <property name="text">
                <string>Next</string>
@@ -704,16 +663,16 @@
              </widget>
             </item>
             <item row="0" column="0">
-             <widget class="QPushButton" name="exit2Button">
-              <property name="text">
-               <string>Exit</string>
+             <widget class="QProgressBar" name="progressBar">
+              <property name="value">
+               <number>0</number>
               </property>
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QProgressBar" name="progressBar">
-              <property name="value">
-               <number>0</number>
+             <widget class="QPushButton" name="skipButton">
+              <property name="text">
+               <string>Skip</string>
               </property>
              </widget>
             </item>
@@ -801,7 +760,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QPushButton" name="RemoveCardButton">
+           <widget class="QPushButton" name="removeCardButton">
             <property name="text">
              <string>Remove Card</string>
             </property>
@@ -813,6 +772,30 @@
       </widget>
      </widget>
     </item>
+    <item row="1" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout_2">
+      <item>
+       <spacer name="horizontalSpacer_4">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>40</width>
+          <height>20</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pushButton">
+        <property name="text">
+         <string>Exit</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
    </layout>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
@@ -820,34 +803,18 @@
  <resources/>
  <connections>
   <connection>
-   <sender>exit2Button</sender>
+   <sender>pushButton</sender>
    <signal>clicked()</signal>
    <receiver>MainWindow</receiver>
    <slot>close()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>64</x>
-     <y>539</y>
+     <x>815</x>
+     <y>561</y>
     </hint>
     <hint type="destinationlabel">
-     <x>0</x>
-     <y>495</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>exitButton</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>close()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>772</x>
-     <y>542</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>840</x>
-     <y>486</y>
+     <x>841</x>
+     <y>570</y>
     </hint>
    </hints>
   </connection>
