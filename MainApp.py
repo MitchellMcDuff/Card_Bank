@@ -29,7 +29,18 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
         self.skipButton.clicked.connect(self.skipCard)
         self.startOverButton.clicked.connect(self.startOver)
         #self.removePlayerButton.clicked.connect(self.removePlayer)
+	
+	#reads each line of playlist.txt into a list which populates the cards	
+	text_file = open("playlist.txt", "r")
+	self.lines = text_file.readlines()
+	text_file.close()
 
+	#fill cardTableWidget with cards
+	for line in self.lines:
+		tableItem = QtGui.QTableWidgetItem(line)
+        	self.cardTableWidget.insertRow(self.cardTableWidget.rowCount())
+		self.cardTableWidget.setItem(self.cardTableWidget.rowCount()-1, 0, tableItem)
+	
 
     def editCardsMenuButtonClick(self):
         self.stackedWidget.setCurrentIndex(2)
@@ -73,10 +84,28 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
         
     def removeCard(self):
         print "remove the selected card"
+	#gets selected row	
+	rows = sorted(set(index.row() for index in
+                      self.cardTableWidget.selectedIndexes()))
+
+	#gets score from row and increases by 1
+	for row in rows:
+		self.cardTableWidget.removeRow(row)
+	
     
     #this will display the next card ONLY if a player has been selected
     def nextCard(self):
         print "display next card and giving a point to someone also updates the progress bar"
+	#gets selected row	
+	rows = sorted(set(index.row() for index in
+                      self.scoreBoardTableWidget.selectedIndexes()))
+
+    	#gets score from row and increases by 1
+	for row in rows:
+		s = int(self.scoreBoardTableWidget.item(row,1).text()) + 1
+		print s
+		score = str(s)
+		self.scoreBoardTableWidget.setItem(row, 1, QtGui.QTableWidgetItem(score))
     
     def skipCard(self):
         print "displays next card without giving points also updates the progress bar"

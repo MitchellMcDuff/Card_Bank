@@ -335,13 +335,13 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow", None))
+        MainWindow.setWindowTitle(_translate("MainWindow", "Card Bank", None))
         self.editCardsButton.setText(_translate("MainWindow", "edit Cards", None))
         self.playButton.setText(_translate("MainWindow", "Play!", None))
         self.label_2.setText(_translate("MainWindow", "Player Name:", None))
         self.addPlayerButton.setText(_translate("MainWindow", "Add Player", None))
         self.label.setText(_translate("MainWindow", "Players:", None))
-        self.startOverButton.setText(_translate("MainWindow", "Start OVer", None))
+        self.startOverButton.setText(_translate("MainWindow", "Start Over", None))
         self.goBackButton.setText(_translate("MainWindow", "Go Back", None))
         item = self.scoreBoardTableWidget.horizontalHeaderItem(0)
         item.setText(_translate("MainWindow", "Player", None))
