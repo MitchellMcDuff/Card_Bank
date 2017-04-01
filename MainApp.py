@@ -35,6 +35,8 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
 	self.lines = text_file.readlines()
 	text_file.close()
 	self.updateCardTable()
+	self.totalCards = len(self.lines)
+	self.cardsPlayed = 0.0
 
     def editCardsMenuButtonClick(self):
         self.stackedWidget.setCurrentIndex(2)
@@ -103,14 +105,15 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
     	#gets score from row and increases by 1
 	for row in rows:
 		s = int(self.scoreBoardTableWidget.item(row,1).text()) + 1
-		print s
 		score = str(s)
 		self.scoreBoardTableWidget.setItem(row, 1, QtGui.QTableWidgetItem(score))
-
-	self.progressBar.setProperty("value", 1)
+		self.skipCard()
     
     def skipCard(self):
-        print "displays next card without giving points also updates the progress bar"
+        #print "displays next card without giving points also updates the progress bar"
+	self.cardsPlayed = self.cardsPlayed + 1.0
+	#print self.cardsPlayed / self.totalCards
+	self.progressBar.setProperty("value", self.cardsPlayed/self.totalCards*100)
     
     def startOver(self):
         #print "will start the game over and reset all scores to 0 also updates the progress bar"
