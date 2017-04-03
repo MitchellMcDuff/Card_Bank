@@ -65,7 +65,10 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
 		self.cardTableWidget.setItem(self.cardTableWidget.rowCount()-1, 0, tableItem)
 
     def cleanCardTable(self):
-        print "This needs to remove all rows that have empty card names"
+        #print "This needs to remove all rows that have empty card names"
+	for i in reversed(range(self.cardTableWidget.rowCount())):
+    		if self.cardTableWidget.item(i,0) is None:
+			self.cardTableWidget.removeRow(i)
         
     def addPlayer(self):
         #if there is an letter add the player to the list
@@ -141,6 +144,9 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
         #for item in self.playerListWidget.selectedItems():
             #self.playerListWidget.takeItem(self.playerListWidget.row(item))
         #for item in self.scoreBoardTableWidget.
+
+    def savePlaylist(self):
+	print "Save changes to playlist.txt"
         
         
 def main():
