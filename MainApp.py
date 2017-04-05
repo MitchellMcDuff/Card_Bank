@@ -31,17 +31,18 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
         self.startOverButton.clicked.connect(self.startOver)
         #self.removePlayerButton.clicked.connect(self.removePlayer)
 
-	#reads each line of playlist.txt into a list which populates the cards
-	text_file = open("playlist.txt", "r")
-	self.cards = text_file.readlines()
-	text_file.close()
-	self.updateCardTable()
-	self.playingCards = []
-	for item in self.cards:
-		self.playingCards.append(item)
-	self.totalCards = len(self.cards)
-	self.cardsPlayed = 0.0
-	self.skipCard() #draw first card
+    	#reads each line of playlist.txt into a list which populates the cards
+    	text_file = open("playlist.txt", "r")
+    	self.cards = text_file.readlines()
+    	text_file.close()
+    	self.updateCardTable()
+    	self.playingCards = []
+    	for item in self.cards:
+    		self.playingCards.append(item)
+    	self.totalCards = len(self.cards)
+    	self.cardsPlayed = 0.0
+    	self.skipCard() #draw first card
+        self.cardsEdited = False
 
     def editCardsMenuButtonClick(self):
         self.stackedWidget.setCurrentIndex(2)
@@ -56,22 +57,28 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
     def goBackToMainMenu2ButtonClick(self):
         self.stackedWidget.setCurrentIndex(0)
         self.cleanCardTable()
+        lastRow = self.cardTableWidget.rowCount() - 1
+        self.cards.append(self.cardTableWidget.item(lastRow,0).text())
+        self.playingCards.append(self.cardTableWidget.item(lastRow,0).text())
+        if self.cardsEdited:
+            self.startOver()
+        self.cardsEdited = False
 
     #this needs to populate the card table with the items from the currently selected playlist
     def updateCardTable(self):
         #print "This needs to populate the card table with the items from the currently selected playlist"
 
-	#fill cardTableWidget with cards
-	for line in self.cards:
-		tableItem = QtGui.QTableWidgetItem(line)
-        	self.cardTableWidget.insertRow(self.cardTableWidget.rowCount())
-		self.cardTableWidget.setItem(self.cardTableWidget.rowCount()-1, 0, tableItem)
+    	#fill cardTableWidget with cards
+    	for line in self.cards:
+            tableItem = QtGui.QTableWidgetItem(line)
+            self.cardTableWidget.insertRow(self.cardTableWidget.rowCount())
+            self.cardTableWidget.setItem(self.cardTableWidget.rowCount()-1, 0, tableItem)
 
     def cleanCardTable(self):
         #print "This needs to remove all rows that have empty card names"
-	for i in reversed(range(self.cardTableWidget.rowCount())):
-    		if self.cardTableWidget.item(i,0) is None:
-			self.cardTableWidget.removeRow(i)
+        for i in reversed(range(self.cardTableWidget.rowCount())):
+            if self.cardTableWidget.item(i,0) is None:
+                self.cardTableWidget.removeRow(i)
 
     def addPlayer(self):
         #if there is an letter add the player to the list
@@ -91,25 +98,29 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
 
     def addCard(self):
         self.cardTableWidget.insertRow(self.cardTableWidget.rowCount())
-	self.totalCards = self.totalCards + 1
+        self.totalCards = self.totalCards + 1
+        self.cardsEdited = True
 
     def removeCard(self):
         #print "remove the selected card"
-	#gets selected row
-	rows = sorted(set(index.row() for index in
-                      self.cardTableWidget.selectedIndexes()))
+    	#gets selected row
+    	rows = sorted(set(index.row() for index in
+        self.cardTableWidget.selectedIndexes()))
 
-	#gets score from row and increases by 1
-	for row in rows:
-		self.cardTableWidget.removeRow(row)
+    	#gets score from row and increases by 1
+    	for row in rows:
+            self.cards.pop(row)
+            self.playingCards.pop(row)
+            self.cardTableWidget.removeRow(row)
+        self.cardsEdited = True
 
 
     #this will display the next card ONLY if a player has been selected
     def nextCard(self):
         #print "display next card and giving a point to someone also updates the progress bar"
-	#gets selected row
-	rows = sorted(set(index.row() for index in
-                      self.scoreBoardTableWidget.selectedIndexes()))
+    	#gets selected row
+    	rows = sorted(set(index.row() for index in
+        self.scoreBoardTableWidget.selectedIndexes()))
 
     	#gets score from row and increases by 1
 	for row in rows:
@@ -132,16 +143,19 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
 
     def startOver(self):
         #print "will start the game over and reset all scores to 0 also updates the progress bar"
-	for i in reversed(range(self.cardTableWidget.rowCount())):
-    		self.cardTableWidget.removeRow(i)
-	self.updateCardTable()
-	self.stackedWidget.setCurrentIndex(0)
-	for i in reversed(range(self.scoreBoardTableWidget.rowCount())):
-        	self.scoreBoardTableWidget.setItem(i, 1, QtGui.QTableWidgetItem("0"))
-	self.progressBar.setProperty("value", 0)
-	self.cardsPlayed = 0.0
-	self.totalCards = len(self.cards)
-	self.skipCard()
+    	#for i in reversed(range(self.cardTableWidget.rowCount())):
+        		#self.cardTableWidget.removeRow(i)
+    	#self.updateCardTable()
+        self.stackedWidget.setCurrentIndex(0)
+        for i in reversed(range(self.scoreBoardTableWidget.rowCount())):
+            self.scoreBoardTableWidget.setItem(i, 1, QtGui.QTableWidgetItem("0"))
+    	self.progressBar.setProperty("value", 0)
+    	self.cardsPlayed = 0.0
+        self.totalCards = len(self.cards)
+        self.playingCards = []
+        for item in self.cards:
+        	self.playingCards.append(item)
+        self.skipCard()
 
     #def removePlayer(self):
         #for item in self.playerListWidget.selectedItems():
@@ -150,7 +164,7 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
 
 
     def savePlaylist(self):
-	print "Save changes to playlist.txt"
+        print "Save changes to playlist.txt"
 
 
 def main():
