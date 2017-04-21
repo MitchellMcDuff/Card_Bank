@@ -29,6 +29,7 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
         self.nextButton.clicked.connect(self.nextCard)
         self.skipButton.clicked.connect(self.skipCard)
         self.startOverButton.clicked.connect(self.startOver)
+        self.startButton.clicked.connect(self.startButtonClicked)
         #self.removePlayerButton.clicked.connect(self.removePlayer)
 
     	#reads each line of playlist.txt into a list which populates the cards
@@ -43,7 +44,9 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
     	self.cardsPlayed = 0.0
     	self.skipCard() #draw first card
         self.cardsEdited = False
-
+    def startButtonClicked(self):
+        self.stackedWidget.setCurrentIndex(0)
+        
     def editCardsMenuButtonClick(self):
         self.stackedWidget.setCurrentIndex(2)
         #self.updateCardTable()
