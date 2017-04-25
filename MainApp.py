@@ -30,7 +30,7 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
         self.skipButton.clicked.connect(self.skipCard)
         self.startOverButton.clicked.connect(self.startOver)
         self.startButton.clicked.connect(self.startButtonClicked)
-        #self.removePlayerButton.clicked.connect(self.removePlayer)
+        self.removePlayerButton.clicked.connect(self.removePlayer)
 
     	#reads each line of playlist.txt into a list which populates the cards
     	text_file = open("playlist.txt", "r")
@@ -44,6 +44,7 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
     	self.cardsPlayed = 0.0
     	self.skipCard() #draw first card
         self.cardsEdited = False
+        
     def startButtonClicked(self):
         self.stackedWidget.setCurrentIndex(0)
         
@@ -98,7 +99,6 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
             self.scoreBoardTableWidget.setItem(self.scoreBoardTableWidget.rowCount()-1, 1, QtGui.QTableWidgetItem("0"))
         self.playerNameLineEdit.clear()
 
-
     def addCard(self):
         self.cardTableWidget.insertRow(self.cardTableWidget.rowCount())
         self.totalCards = self.totalCards + 1
@@ -107,8 +107,7 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
     def removeCard(self):
         #print "remove the selected card"
     	#gets selected row
-    	rows = sorted(set(index.row() for index in
-        self.cardTableWidget.selectedIndexes()))
+    	rows = sorted(set(index.row() for index in self.cardTableWidget.selectedIndexes()))
 
     	#gets score from row and increases by 1
     	for row in rows:
@@ -160,10 +159,17 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
         	self.playingCards.append(item)
         self.skipCard()
 
-    #def removePlayer(self):
-        #for item in self.playerListWidget.selectedItems():
-            #self.playerListWidget.takeItem(self.playerListWidget.row(item))
-        #for item in self.scoreBoardTableWidget.
+    def removePlayer(self):
+        rowCount = self.scoreBoardTableWidget.rowCount()
+        rowNum = 0
+        #get selected player widget
+        for listItem in self.playerListWidget.selectedItems():
+            self.playerListWidget.takeItem(self.playerListWidget.row(listItem))
+            for row in xrange(0,rowCount):
+                if (self.scoreBoardTableWidget.item(row,0).text() == listItem.text()):
+                    rowNum = row
+            self.scoreBoardTableWidget.removeRow(rowNum)
+                
 
 
     def savePlaylist(self):
