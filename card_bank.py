@@ -2568,7 +2568,7 @@ class Ui_MainWindow(object):
         MainWindow.setCentralWidget(self.mainGridWidget)
 
         self.retranslateUi(MainWindow)
-        self.stackedWidget.setCurrentIndex(0)
+        self.stackedWidget.setCurrentIndex(3)
         QtCore.QObject.connect(self.pushButton, QtCore.SIGNAL(_fromUtf8("clicked()")), MainWindow.close)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.editChosenPlaylistButton, self.playButton)
