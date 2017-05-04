@@ -77,7 +77,7 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
             self.scoreBoardTableWidget.insertRow(self.scoreBoardTableWidget.rowCount())
             self.scoreBoardTableWidget.setItem(self.scoreBoardTableWidget.rowCount()-1, 0, tableItem)
             self.scoreBoardTableWidget.setItem(self.scoreBoardTableWidget.rowCount()-1, 1, QtGui.QTableWidgetItem("0"))
-
+        self.startOver()
         self.stackedWidget.setCurrentIndex(1)
 
     def goBackToMainMenuButtonClick(self):
@@ -183,6 +183,15 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
 
     def savePlaylist(self):
         self.warningLabel.clear()
+        text_file = open(self.chosenPlaylistLabel.text() + ".txt", "w")
+        text_file.seek(0)
+        self.cleanCardTable()
+        for i in range(self.cardTableWidget.rowCount()):
+            line = self.cardTableWidget.item(i,0).text()
+            text_file.write(str(self.cardTableWidget.item(i,0).text()).rstrip() + "\n")
+        text_file.truncate()
+        text_file.close()
+        #self.loadPlaylist()
         self.warningLabel.setText("Save changes to playlist.txt")
 
     def removePlaylist(self):
@@ -212,7 +221,9 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
     def loadPlaylist(self):
         text_file = open(self.chosenPlaylistLabel.text() + ".txt", "r")
         del self.cards[:]
-    	self.cards = text_file.readlines()
+    	self.cards = text_file.read().splitlines()
+        for item in self.cards:
+            item.rstrip()
     	text_file.close()
     	self.updateCardTable()
         self.cardsPlayed = 0.0
