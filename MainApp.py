@@ -170,7 +170,9 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
             #text_file.write();
             text_file.close()
             self.writePlaylists()
-        self.warningLabel.setText("do stuff here to add the new playlist")
+            self.warningLabel.setText("Playlist " + listItem.text() + " added.")
+        else:
+            self.warningLabel.setText("Please enter a name for your playlist.")
 
         self.playlistNameLineEdit.clear()
 
@@ -178,7 +180,7 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
         self.warningLabel.clear()
         for listItem in self.playlistListWidget.selectedItems():
             self.chosenPlaylistLabel.setText(listItem.text())
-        self.warningLabel.setText("do stuff for choosing playlist warn them if there is no selected playlist")
+        self.warningLabel.setText("Playlist " + self.chosenPlaylistLabel.text() + " chosen.")
         self.loadPlaylist()
 
     def savePlaylist(self):
@@ -192,7 +194,7 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
         text_file.truncate()
         text_file.close()
         #self.loadPlaylist()
-        self.warningLabel.setText("Save changes to playlist.txt")
+        self.warningLabel.setText("Changes saved to playlist.")
 
     def removePlaylist(self):
         self.warningLabel.clear()
@@ -201,7 +203,7 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
                 self.playlistListWidget.takeItem(self.playlistListWidget.row(listItem))
             self.writePlaylists()
         else:
-            self.warningLabel.setText("cannot delete last playlist")
+            self.warningLabel.setText("The last playlist cannot be deleted.")
 
     def loadListOfPlaylists(self):
         text_file = open("listOfPlaylists.txt", "r")
@@ -241,7 +243,7 @@ class MainMenu(QtGui.QMainWindow, Ui_MainWindow):
     	rows = sorted(set(index.row() for index in
         self.scoreBoardTableWidget.selectedIndexes()))
 
-        self.warningLabel.setText("warning here for not having a player selected")
+        self.warningLabel.setText("Please select the winning player before advancing to next card.")
 
 
     	#gets score from row and increases by 1
